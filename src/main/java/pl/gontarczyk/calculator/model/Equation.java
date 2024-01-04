@@ -13,7 +13,7 @@ public class Equation {
 
     private String equation;
     private BigDecimal firstValue;
-    private char operation;
+    private String operation;
     private BigDecimal secondValue;
     private BigDecimal result;
 }
