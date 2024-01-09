@@ -2,6 +2,7 @@ package pl.gontarczyk.calculator.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.gontarczyk.calculator.exception.StrategyNotFoundException;
 import pl.gontarczyk.calculator.model.Equation;
 import pl.gontarczyk.calculator.strategy.CalculatorStrategy;
 
@@ -14,6 +15,9 @@ public class CalculatorService {
     private final Map<String, CalculatorStrategy> strategies;
 
     public Equation solve(Equation equation) {
+        if (!strategies.containsKey(equation.getOperation())) {
+            throw new StrategyNotFoundException();
+        }
         CalculatorStrategy strategy = strategies.get(equation.getOperation());
         equation.setResult(strategy.calculate(equation.getFirstValue(), equation.getSecondValue()));
         return equation;

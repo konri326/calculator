@@ -1,6 +1,7 @@
 package pl.gontarczyk.calculator.strategy.implementation;
 
 import org.springframework.stereotype.Component;
+import pl.gontarczyk.calculator.exception.IllegalDivisionException;
 import pl.gontarczyk.calculator.strategy.CalculatorStrategy;
 
 import java.math.BigDecimal;
@@ -12,9 +13,9 @@ public class Division implements CalculatorStrategy {
 
     @Override
     public BigDecimal calculate(BigDecimal firstValue, BigDecimal secondValue) {
-        if (!firstValue.equals(BigDecimal.ZERO) || !secondValue.equals(BigDecimal.ZERO)) {
-            return firstValue.divide(secondValue, MathContext.DECIMAL64);
+        if (firstValue.equals(BigDecimal.ZERO) || secondValue.equals(BigDecimal.ZERO)) {
+            throw new IllegalDivisionException();
         }
-        throw new IllegalArgumentException("");
+        return firstValue.divide(secondValue, MathContext.DECIMAL64);
     }
 }

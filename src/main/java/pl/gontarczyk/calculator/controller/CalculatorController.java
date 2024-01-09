@@ -1,5 +1,6 @@
 package pl.gontarczyk.calculator.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CalculatorController {
     private final EquationMapper equationMapper;
 
     @PostMapping("/solve")
-    public ResponseEntity<EquationDto> solve(@RequestBody EquationRequestDto equationRequestDto) {
+    public ResponseEntity<EquationDto> solve(@RequestBody @Valid EquationRequestDto equationRequestDto) {
         EquationDto equationDto = equationMapper.fromRequestDto(equationRequestDto);
         EquationDto returnedEquation = equationMapper.toDto(calculatorService.solve(equationMapper.toEntity(equationDto)));
         return new ResponseEntity<>(returnedEquation, HttpStatus.OK);
