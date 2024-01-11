@@ -6,7 +6,6 @@ import pl.gontarczyk.calculator.strategy.CalculatorStrategy;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 
 @Component("/")
 public class Division implements CalculatorStrategy {
